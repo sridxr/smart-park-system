@@ -1,0 +1,1 @@
+export { getDashboardPath } from "./navigation";

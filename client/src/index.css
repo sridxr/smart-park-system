@@ -1,0 +1,420 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: "Segoe UI Variable Display", "Trebuchet MS", "Segoe UI", sans-serif;
+  --app-bg: #0b0f19;
+  --app-surface: #121826;
+  --app-surface-elevated: rgba(18, 24, 38, 0.92);
+  --app-panel: rgba(18, 24, 38, 0.72);
+  --app-border: rgba(148, 163, 184, 0.16);
+  --app-border-strong: rgba(148, 163, 184, 0.24);
+  --app-primary: #3b82f6;
+  --app-accent: #22c55e;
+  --app-warning: #f59e0b;
+  --app-danger: #ef4444;
+  --app-text: #e5e7eb;
+  --app-text-muted: #9ca3af;
+  --app-shadow: 0 24px 80px rgba(2, 8, 23, 0.42);
+  --role-bg: #0b1220;
+  --role-card: #121a2b;
+  --role-primary: #3b82f6;
+  --role-primary-rgb: 59, 130, 246;
+  --role-accent: #06b6d4;
+  --role-accent-rgb: 6, 182, 212;
+  --role-shadow: 0 28px 90px rgba(2, 8, 23, 0.42);
+}
+
+html[data-theme="light"],
+body[data-theme="light"] {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(var(--role-primary-rgb), 0.12), transparent 18%),
+    radial-gradient(circle at bottom right, rgba(var(--role-accent-rgb), 0.1), transparent 20%),
+    var(--app-bg);
+  color: var(--app-text);
+  text-rendering: optimizeLegibility;
+}
+
+body[data-theme="light"] {
+  background:
+    radial-gradient(circle at top left, rgba(var(--role-primary-rgb), 0.05), transparent 16%),
+    radial-gradient(circle at bottom right, rgba(var(--role-accent-rgb), 0.04), transparent 16%),
+    var(--app-bg);
+  color: var(--app-text);
+}
+
+body[data-theme="light"] ::selection {
+  background: rgba(var(--role-primary-rgb), 0.18);
+  color: var(--app-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #f8fafc;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.9), rgba(59, 130, 246, 0.75));
+}
+
+@layer components {
+  .app-shell-bg {
+    background:
+      radial-gradient(circle at top left, rgba(var(--role-primary-rgb), 0.14), transparent 18%),
+      radial-gradient(circle at bottom right, rgba(var(--role-accent-rgb), 0.1), transparent 20%),
+      var(--app-bg);
+  }
+
+  .app-surface {
+    border: 1px solid var(--app-border);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)), color-mix(in srgb, var(--role-card) 88%, transparent);
+    box-shadow: var(--role-shadow);
+    backdrop-filter: blur(24px);
+  }
+
+  .app-card {
+    border: 1px solid var(--app-border);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+    box-shadow: 0 18px 50px rgba(2, 8, 23, 0.22);
+    backdrop-filter: blur(18px);
+  }
+
+  .app-card-hover {
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .app-card-hover:hover {
+    transform: translateY(-4px);
+    border-color: var(--app-border-strong);
+    box-shadow: 0 28px 70px rgba(2, 8, 23, 0.28);
+  }
+
+  .app-hover-lift {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .app-hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 48px rgba(2, 8, 23, 0.24);
+  }
+
+  .app-input {
+    border: 1px solid var(--app-border);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--app-text);
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .app-input::placeholder {
+    color: rgba(156, 163, 175, 0.75);
+  }
+
+  .app-input:focus {
+    outline: none;
+    border-color: rgba(var(--role-primary-rgb), 0.5);
+    box-shadow: 0 0 0 4px rgba(var(--role-primary-rgb), 0.14);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .app-button-primary {
+    background: linear-gradient(135deg, rgba(var(--role-primary-rgb), 1), rgba(var(--role-accent-rgb), 0.92));
+    color: white;
+    box-shadow: 0 12px 32px rgba(var(--role-primary-rgb), 0.25);
+    transition:
+      transform 150ms ease,
+      box-shadow 150ms ease,
+      opacity 150ms ease;
+  }
+
+  .app-button-primary:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 18px 42px rgba(var(--role-primary-rgb), 0.32);
+  }
+
+  .app-button-secondary {
+    border: 1px solid var(--app-border);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--app-text);
+    transition:
+      transform 150ms ease,
+      border-color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .app-button-secondary:hover {
+    transform: translateY(-1px);
+    border-color: var(--app-border-strong);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .app-empty-state {
+    border: 1px dashed var(--app-border);
+    background: rgba(255, 255, 255, 0.025);
+    color: var(--app-text-muted);
+  }
+
+  .app-role-badge {
+    border: 1px solid rgba(var(--role-primary-rgb), 0.24);
+    background: linear-gradient(135deg, rgba(var(--role-primary-rgb), 0.18), rgba(var(--role-accent-rgb), 0.12));
+    color: var(--app-text);
+  }
+
+  .app-accent-panel {
+    border: 1px solid rgba(var(--role-primary-rgb), 0.18);
+    background: linear-gradient(145deg, rgba(var(--role-primary-rgb), 0.18), rgba(var(--role-accent-rgb), 0.1));
+    box-shadow: 0 24px 70px rgba(var(--role-primary-rgb), 0.14);
+  }
+
+  .app-hero-panel {
+    position: relative;
+    border: 1px solid rgba(var(--role-primary-rgb), 0.16);
+    background:
+      radial-gradient(circle at top right, rgba(var(--role-accent-rgb), 0.14), transparent 28%),
+      radial-gradient(circle at left center, rgba(var(--role-primary-rgb), 0.14), transparent 22%),
+      linear-gradient(145deg, rgba(15, 23, 42, 0.92), rgba(2, 8, 23, 0.88));
+    box-shadow: 0 28px 80px rgba(2, 8, 23, 0.32);
+    backdrop-filter: blur(24px);
+  }
+
+  .app-fab {
+    border: 1px solid rgba(var(--role-primary-rgb), 0.2);
+    background: linear-gradient(135deg, rgba(var(--role-primary-rgb), 0.96), rgba(var(--role-accent-rgb), 0.88));
+    box-shadow: 0 22px 50px rgba(var(--role-primary-rgb), 0.28);
+  }
+
+  .app-type-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    animation: app-cursor-blink 1s steps(1, end) infinite;
+  }
+
+  .app-status-pill {
+    border: 1px solid rgba(var(--role-accent-rgb), 0.22);
+    background: rgba(var(--role-accent-rgb), 0.14);
+    color: var(--app-text);
+  }
+
+  .app-skeleton {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--app-border);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .app-skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    animation: app-shimmer 1.6s infinite;
+  }
+}
+
+body[data-theme="light"] .app-surface {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+    color-mix(in srgb, var(--role-card) 92%, rgba(15, 23, 42, 0.12));
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+}
+
+body[data-theme="light"] .app-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+    color-mix(in srgb, var(--role-card) 90%, rgba(15, 23, 42, 0.14));
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.07);
+}
+
+body[data-theme="light"] .app-card-hover:hover {
+  box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
+}
+
+body[data-theme="light"] .app-input {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body[data-theme="light"] .app-input:focus {
+  box-shadow: 0 0 0 3px rgba(var(--role-primary-rgb), 0.1);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body[data-theme="light"] .app-button-primary {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--role-primary-rgb), 0.72),
+    rgba(var(--role-accent-rgb), 0.58)
+  );
+  color: #f8fafc;
+  box-shadow: 0 8px 18px rgba(var(--role-primary-rgb), 0.12);
+}
+
+body[data-theme="light"] .app-button-primary:hover {
+  box-shadow: 0 12px 24px rgba(var(--role-primary-rgb), 0.15);
+}
+
+body[data-theme="light"] .app-button-secondary {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme="light"] .app-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body[data-theme="light"] .app-role-badge {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--role-primary-rgb), 0.1),
+    rgba(var(--role-accent-rgb), 0.08)
+  );
+}
+
+body[data-theme="light"] .app-accent-panel {
+  border-color: rgba(var(--role-primary-rgb), 0.14);
+  background: linear-gradient(
+    145deg,
+    rgba(var(--role-primary-rgb), 0.08),
+    rgba(var(--role-accent-rgb), 0.05)
+  );
+  box-shadow: 0 12px 22px rgba(var(--role-primary-rgb), 0.06);
+}
+
+body[data-theme="light"] .app-hero-panel {
+  background:
+    radial-gradient(circle at top right, rgba(var(--role-accent-rgb), 0.08), transparent 24%),
+    radial-gradient(circle at left center, rgba(var(--role-primary-rgb), 0.08), transparent 20%),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--role-card) 90%, rgba(15, 23, 42, 0.1)),
+      color-mix(in srgb, var(--role-bg) 86%, rgba(15, 23, 42, 0.16))
+    );
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.09);
+}
+
+body[data-theme="light"] .app-fab {
+  box-shadow: 0 18px 34px rgba(var(--role-primary-rgb), 0.18);
+}
+
+body[data-theme="light"] .app-status-pill {
+  border-color: rgba(var(--role-accent-rgb), 0.16);
+  background: rgba(var(--role-accent-rgb), 0.08);
+}
+
+body[data-theme="light"] .app-empty-state {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+body[data-theme="light"] .app-skeleton {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+body[data-theme="light"] .metric-card {
+  border-color: rgba(100, 116, 139, 0.16);
+  background:
+    linear-gradient(145deg, rgba(var(--role-primary-rgb), 0.08), rgba(var(--role-accent-rgb), 0.05)),
+    color-mix(in srgb, var(--role-card) 88%, rgba(15, 23, 42, 0.18));
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+}
+
+body[data-theme="light"] .metric-card-label,
+body[data-theme="light"] .metric-card-helper {
+  color: color-mix(in srgb, var(--app-text-muted) 94%, #334155);
+}
+
+body[data-theme="light"] .metric-card-value {
+  color: color-mix(in srgb, var(--app-text) 92%, #0f172a);
+}
+
+body[data-theme="light"] .app-topbar {
+  border-bottom-color: rgba(100, 116, 139, 0.18);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--role-card) 86%, #64748b),
+    color-mix(in srgb, var(--role-card) 80%, #475569)
+  );
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+body[data-theme="light"] .app-sidebar {
+  border-right-color: rgba(100, 116, 139, 0.18);
+}
+
+body[data-theme="light"] .app-sidebar .app-surface {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    color-mix(in srgb, var(--role-card) 88%, rgba(15, 23, 42, 0.16));
+}
+
+body[data-theme="light"] [data-role="admin"] .app-accent-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(var(--role-primary-rgb), 0.06),
+    rgba(var(--role-accent-rgb), 0.04)
+  );
+}
+
+body[data-theme="light"] [data-role="admin"] .app-shell-bg {
+  background:
+    radial-gradient(circle at top left, rgba(var(--role-primary-rgb), 0.05), transparent 15%),
+    radial-gradient(circle at bottom right, rgba(var(--role-accent-rgb), 0.035), transparent 14%),
+    color-mix(in srgb, var(--role-bg) 92%, #cbd5e1);
+}
+
+@keyframes app-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes app-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
